@@ -2,8 +2,8 @@
 
 set -eu
 
-replay_cmd=`readlink -f ../../../build/linux-x86_64-replay/suika-replay`
-compare_cmd=`readlink -f ../../../build/linux-x86_64-replay/compare.py`
+replay_cmd=`readlink -f ../../build/linux-x86_64-replay/suika-replay`
+compare_cmd=`readlink -f ../../build/linux-x86_64-replay/compare.py`
 
 for dir in `ls -d *.record`; do
     echo Running $dir
