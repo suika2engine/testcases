@@ -2,7 +2,10 @@
 
 set -eu
 
+echo Checking suika-replay
 replay_cmd=`readlink -f ../../build/linux-x86_64-replay/suika-replay`
+
+echo Checking compare.py
 compare_cmd=`readlink -f ../../build/linux-x86_64-replay/compare.py`
 
 for dir in `ls -d *.record`; do
