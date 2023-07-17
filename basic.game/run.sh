@@ -3,6 +3,17 @@
 set -eu
 
 echo Checking suika-replay
+echo pwd=`pwd`
+echo ls ./
+ls ./
+echo ls ../
+ls ../
+echo ls ../../
+ls ../../
+echo ls ../../build/
+ls ../../build/
+echo ls ../../build/linux-x86_64-replay/
+ls ../../build/linux-x86_64-replay/
 replay_cmd=`readlink -f ../../build/linux-x86_64-replay/suika-replay`
 
 echo Checking compare.py
