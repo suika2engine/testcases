@@ -12,7 +12,7 @@ for dir in `ls -d *.record`; do
     echo "  Running $dir"
     dir=`readlink -f $dir`
     cd game && \
-    rm -rf replay && \
+    rm -rf replay sav && \
     $replay_cmd $dir && \
     python3 $compare_cmd $dir replay \
     rm -rf replay sav log.txt
