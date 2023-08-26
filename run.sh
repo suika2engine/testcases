@@ -7,7 +7,7 @@ replay_cmd=`readlink -f ../build/linux-x86_64-replay/suika-replay`
 if [ ! -e $replay_cmd ]; then
     echo "Info: Building suika-replay.";
     pushd . && cd ../build/linux-x86_64-replay && make && popd;
-    if [ -e $replay_cmd ]; then
+    if [ ! -e $replay_cmd ]; then
 	echo "Error: Failed to build suika-replay binary."
 	exit 1;
     fi
