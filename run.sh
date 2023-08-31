@@ -42,12 +42,22 @@ for testdata in `ls -d *.data`; do
 
 	# Run.
 	if [ "$1" = "--no-x11" ]; then
-	    cd $testdata/game && \
-		xvfb-run -a --server-args="-screen 0 1920x1080x24" $replay_cmd ../`basename $testcase` && \
+	    cd $testdata/game;
+		xvfb-run -a --server-args="-screen 0 1920x1080x24" $replay_cmd ../`basename $testcase`;
+		if [ $? -gt 0 ]; then
+		    tc_fail=`expr $tc_fail + 1`;
+		    cd ../../;
+		    continue;
+		fi;
 	    cd ../../;
 	else
-	    cd $testdata/game && \
-		$X_CMD $replay_cmd ../`basename $testcase` && \
+	    cd $testdata/game;
+		$X_CMD $replay_cmd ../`basename $testcase`;
+		if [ $? -gt 0 ]; then
+		    tc_fail=`expr $tc_fail + 1`;
+		    cd ../../;
+		    continue;
+		fi;
 	    cd ../../;
 	fi
 
