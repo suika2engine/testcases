@@ -3,10 +3,10 @@
 start_time=`date +'%s'`
 
 # Checking for suika-replay binary.
-replay_cmd=`readlink -f ../build/linux-x86_64-replay/suika-replay`
+replay_cmd=`readlink -f ../build/replay-linux-x86_64/suika-replay`
 if [ ! -e $replay_cmd ]; then
     echo "Info: Building suika-replay.";
-    pushd . && cd ../build/linux-x86_64-replay && make && popd;
+    pushd . && cd ../build/replay-linux-x86_64 && make && popd;
     if [ ! -e $replay_cmd ]; then
 	echo "Error: Failed to build suika-replay binary."
 	exit 1;
@@ -14,7 +14,7 @@ if [ ! -e $replay_cmd ]; then
 fi
 
 # Remove existing profile data.
-rm -rf ../build/linux-x86_64-replay/*.gcda ../build/linux-x86_64-replay/sav
+rm -rf ../build/replay-linux-x86_64/*.gcda ../build/replay-linux-x86_64/sav
 
 # Remove existing failed data.
 rm -rf failed-*
@@ -96,14 +96,14 @@ if [ "$tc_count" -ne "$tc_success" ]; then
 fi
 
 # Make a coverage report.
-cd ../build/linux-x86_64-replay && \
+cd ../build/replay-linux-x86_64 && \
     lcov -d . --rc lcov_branch_coverage=1 -c -o app.info > /dev/null 2>&1 && \
     sed -i s+`pwd`+`readlink -f ../../src`+g app.info && \
     lcov -r app.info -o app.info --rc lcov_branch_coverage=1 '/usr/include/*' > /dev/null 2>&1 && \
     lcov --summary --rc lcov_branch_coverage=1 app.info | tail -n +2 && \
     genhtml -o lcovoutput -p `pwd` --num-spaces 4 --rc lcov_branch_coverage=1 -f app.info > /dev/null 2>&1 && \
 cd ../../testcases
-mv ../build/linux-x86_64-replay/lcovoutput ./report
+mv ../build/replay-linux-x86_64/lcovoutput ./report
 
 # Print the lap time.
 end_time=`date +'%s'`

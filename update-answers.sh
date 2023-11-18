@@ -4,7 +4,7 @@ set -eu
 
 echo "Checking for suika-replay binary."
 
-replay_cmd=`readlink -f ../build/linux-x86_64-replay/suika-replay`
+replay_cmd=`readlink -f ../build/replay-linux-x86_64/suika-replay`
 if [ ! -e $replay_cmd ]; then
     echo "Error: Please build suika-replay first."
     exit 1;
